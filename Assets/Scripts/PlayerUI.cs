@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using YG;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerUI : MonoBehaviour
     ChromaticAberration _chromaticAberration;
 
     Rigidbody2D _rb;
+    int oldRecord;
 
     private void Start()
     {
@@ -22,6 +24,7 @@ public class PlayerUI : MonoBehaviour
         _postProcess = _camera.GetComponent<PostProcessVolume>();
 
         _postProcess.profile.TryGetSettings(out _chromaticAberration);
+        oldRecord = YandexGame.savesData.record;
     }
 
     private void Update()
@@ -55,6 +58,12 @@ public class PlayerUI : MonoBehaviour
         if (difference > 0)
         {
             _txtScore.text = difference + " ì";
+
+            if (oldRecord < difference)
+            {
+                YandexGame.savesData.record = difference;
+                YandexGame.SaveProgress();
+            }
         }
         else
         {

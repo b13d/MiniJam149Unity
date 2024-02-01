@@ -12,8 +12,15 @@ public class Yandex : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI _txtRecord;
 
-    [DllImport("__Internal")]
-    private static extern void GetRecord();
+    [SerializeField]
+    int maxRecord;
+
+    public int CurrentRecord
+    {
+        get { return maxRecord; }
+        set { maxRecord = value; }
+    }
+
 
     [DllImport("__Internal")]
     private static extern void SaveGame(string newRecord);
@@ -40,11 +47,6 @@ public class Yandex : MonoBehaviour
 
     }
 
-    public void GetData()
-    {
-        GetRecord();
-    }
-
     
     public void SetData(string record)
     {
@@ -58,6 +60,13 @@ public class Yandex : MonoBehaviour
 
     public void Save(string newRecord)
     {
-        SaveGame(newRecord);
+        var jsonRecord = JsonUtility.ToJson(newRecord);
+        SaveGame(jsonRecord);
+    }
+
+    public void Load(string value)
+    {
+        var newRecord = JsonUtility.FromJson<string>(value);
+        _txtRecord.text = newRecord;
     }
 }

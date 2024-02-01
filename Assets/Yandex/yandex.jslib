@@ -21,39 +21,39 @@ mergeInto(LibraryManager.library, {
           console.log(stats["record"]);
           console.log(stats["record"]);
 
-          myGameInstance.SendMessage(
-            "Yandex",
-            "SetData",
-            stats["record"].toString()
-          );
-          myGameInstance.SendMessage("Yandex", "SetData", stats["record"]);
+          if (Object.keys(stats).length != 0) {
+            // var obj = JSON.parse(stats["record"]);
+            // Отправка данных в unity
+
+            const myJSON = JSON.stringify(stats);
+            myGameInstance.SendMessage("Yandex", "Load", myJSON);
+
+            // myGameInstance.SendMessage(
+            //   "Yandex",
+            //   "SetData",
+            //   stats["record"].toString()
+            // );
+          }
         });
       });
     });
   },
-  GetRecord: function () {
-    player.getData().then((stats) => {
-      if (Object.keys(stats).length != 0) {
-        myGameInstance.SendMessage(
-          "Yandex",
-          "InitialRecord",
-          JSON.parse(stats["record"])
-        );
-      } else {
-        myGameInstance.SendMessage("Yandex", "SetData", "0");
-      }
-    });
-  },
   SaveGame: function (newRecord) {
-    var obj = JSON.stringify(newRecord);
+    // var obj = UTF8ToString(newRecord);
+
+    // console.log("obj: " + obj);
+    // var dateString = UTF8ToString(date);
+    var myobj = JSON.parse(newRecord);
+
+    console.log("myobj: " + myobj);
 
     player.setData({
-      record: obj,
+      record: myobj,
     });
 
-    player.getData().then((stats) => {
-      console.log("SAVEGAME: ");
-      // console.log(stats);
-    });
+    // player.getData().then((stats) => {
+    //   console.log("SAVEGAME: ");
+    //   // console.log(stats);
+    // });
   },
 });
