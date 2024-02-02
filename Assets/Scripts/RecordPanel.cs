@@ -6,9 +6,9 @@ using YG;
 
 public class RecordPanel : MonoBehaviour
 {
-
     [SerializeField]
     TextMeshProUGUI txtScoreRecord;
+
 
     void Start()
     {

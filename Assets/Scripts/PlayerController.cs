@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     PlayerSounds _playerSounds;
     GameObject _sprite;
+    Animator _animatorPlayer;
 
 
     public bool CanMove
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
         _playerSounds = GetComponent<PlayerSounds>();
         _rb = GetComponent<Rigidbody2D>();
         _sprite = gameObject.transform.GetChild(0).gameObject;
-
+        _animatorPlayer = _sprite.GetComponent<Animator>();
 
         ResetPlayerSettings();
     }
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     void HoldJump()
     {
+
         if (_touchJumpHold > 4f)
         {
             _touchJumpHold = 4f;
@@ -100,8 +102,6 @@ public class PlayerController : MonoBehaviour
     {
         Pause();
 
-
-
         if (!_canMove)
         {
             return;
@@ -120,9 +120,11 @@ public class PlayerController : MonoBehaviour
                 startJump = transform.position;
             }
 
+
+            _animatorPlayer.SetBool("jump", false);
+            _animatorPlayer.SetBool("isFly", true);
+
             _isJumping = true;
-
-
         }
         else
         {
@@ -148,6 +150,9 @@ public class PlayerController : MonoBehaviour
                 }
                 _wasBuff = false;
             }
+
+
+            _animatorPlayer.SetBool("isFly", false);
             _isJumping = false;
         }
 
@@ -274,6 +279,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
+
+            _animatorPlayer.SetBool("jump", true);
+
             _touchJump = true;
         }
 
@@ -377,6 +385,10 @@ public class PlayerController : MonoBehaviour
 
         isInvulnerability = true;
 
+        _animatorPlayer.SetBool("jump", false);
+        _animatorPlayer.SetBool("isFly", false);
+        _animatorPlayer.SetTrigger("hit");
+
 
         for (int i = _healths.transform.childCount - 1; i >= 0; i--)
         {
@@ -384,7 +396,7 @@ public class PlayerController : MonoBehaviour
             {
                 _healths.transform.GetChild(i).gameObject.SetActive(false);
 
-                _health -= 1;
+                //_health -= 1;
 
                 isShaking = true;
 
