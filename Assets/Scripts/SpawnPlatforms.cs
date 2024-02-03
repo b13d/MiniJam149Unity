@@ -98,7 +98,7 @@ public class SpawnPlatforms : MonoBehaviour
         if (spawnBuff)
         {
             Vector3 posNewPlatform = newPlatform.transform.position;
-            Instantiate(_buff, new Vector3(posNewPlatform.x, posNewPlatform.y + .5f, 1), Quaternion.identity, newPlatform.transform);
+            Instantiate(_buff, new Vector3(posNewPlatform.x, posNewPlatform.y + 1, 1), Quaternion.identity, newPlatform.transform);
 
         }
 

@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 startJump = Vector2.zero;
     Vector2 oldVelocity = Vector2.zero;
+    float _startPosXCamera = 0f;
 
 
     [SerializeField]
@@ -38,6 +39,10 @@ public class PlayerController : MonoBehaviour
     GameObject _sprite;
     Animator _animatorPlayer;
 
+    bool _wasButtonJumpClick;
+
+    [SerializeField]
+    UIButtonInfo _buttonJump;
 
     public bool CanMove
     {
@@ -51,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        _startPosXCamera = Camera.main.transform.position.x;
         _playerSounds = GetComponent<PlayerSounds>();
         _rb = GetComponent<Rigidbody2D>();
         _sprite = gameObject.transform.GetChild(0).gameObject;
@@ -74,10 +79,16 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && isGrounded())
+        if (Input.GetKeyUp(KeyCode.Space) && isGrounded() || (WasButtonJumpClick() && isGrounded()))
         {
+            _wasButtonJumpClick = false;
             HoldJump();
         }
+    }
+
+    bool WasButtonJumpClick()
+    {
+        return _wasButtonJumpClick && !_buttonJump.isDown;
     }
 
     void HoldJump()
@@ -96,6 +107,11 @@ public class PlayerController : MonoBehaviour
 
         _touchJump = false;
         _touchJumpHold = 0f;
+    }
+
+    public float GetSpeedPlayer
+    {
+        get { return _speedPlayer; }
     }
 
     void FixedUpdate()
@@ -156,7 +172,7 @@ public class PlayerController : MonoBehaviour
             _isJumping = false;
         }
 
-        if (_isJumping)
+        if (_isJumping && !isGrounded())
         {
             MoveX();
         }
@@ -169,6 +185,8 @@ public class PlayerController : MonoBehaviour
 
             if (_timeShaking < 0f)
             {
+                var posCamera = Camera.main.transform.position;
+                Camera.main.transform.position = new Vector3(_startPosXCamera, posCamera.y, posCamera.z);
                 isShaking = false;
                 _timeShaking = .5f;
             }
@@ -275,9 +293,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump()
+    public void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (_buttonJump.isDown)
+        {
+            _wasButtonJumpClick = true;
+        }
+
+        if (Input.GetKey(KeyCode.Space) || _buttonJump.isDown)
         {
 
             _animatorPlayer.SetBool("jump", true);
@@ -396,7 +419,7 @@ public class PlayerController : MonoBehaviour
             {
                 _healths.transform.GetChild(i).gameObject.SetActive(false);
 
-                //_health -= 1;
+                _health -= 1;
 
                 isShaking = true;
 

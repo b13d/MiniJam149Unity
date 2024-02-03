@@ -53,6 +53,18 @@ public class SpawnProtrusions : MonoBehaviour
 
         var wall = Instantiate(newWall, _spawnPlace.transform.position + new Vector3(0, endWall, 0), Quaternion.Euler(newWall.transform.eulerAngles), _spawnPlace.transform);
 
+        //for (int i = 1; i < 4; i++)
+        //{
+        //    if (_flipY)
+        //    {
+        //        Instantiate(newWall, wall.transform.position + new Vector3(i * .35f, 0, 0), Quaternion.Euler(newWall.transform.eulerAngles), _spawnPlace.transform);
+        //    }
+        //    else
+        //    {
+        //        Instantiate(newWall, wall.transform.position - new Vector3(i * .35f, 0, 0), Quaternion.Euler(newWall.transform.eulerAngles), _spawnPlace.transform);
+        //    }
+        //}
+        
         endWall += sprite.transform.GetChild(1).transform.position.y + 0.015f;
 
         if (_lastPosition.transform.localPosition.y > wall.transform.localPosition.y)

@@ -4,39 +4,29 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] bool _isRight = false;
-    [SerializeField] float distance = 0;
-    [SerializeField] Vector2 _posXWalls = new Vector2(-3.5f, 5.64f);
+    [SerializeField]
+    private bool isRight;
 
-    private void OnTriggerExit2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("Столкновение");
+            Rigidbody2D _rbPlayer;
+            _rbPlayer = collision.GetComponent<Rigidbody2D>();
 
-            if (_isRight)
+            Vector3 posPlayer = collision.transform.position;
+            float posPlayerX;
+
+            if (posPlayer.x < 0)
             {
-                distance = transform.position.x + Mathf.Abs(collision.transform.position.x);
-
-                Debug.Log("Distance: " + distance);
-
-                if (distance > 6.5f)
-                {
-                    collision.transform.position = new Vector2(_posXWalls[0], collision.transform.position.y);
-                    Debug.Log("Телепорт к другой стене");
-                }
+                posPlayerX = posPlayer.x + 1;
             } else
             {
-                distance = transform.position.x + Mathf.Abs(collision.transform.position.x);
-
-                Debug.Log("Distance: " + distance);
-
-                if (distance > 0.2)
-                {
-                    collision.transform.position = new Vector2(_posXWalls[1] ,collision.transform.position.y);
-                    Debug.Log("Телепорт к другой стене: " + _posXWalls[1]);
-                }
+                posPlayerX = posPlayer.x - 1;
             }
+
+            collision.transform.position = new Vector3(posPlayerX * -1, posPlayer.y, posPlayer.z);
         }
     }
 }

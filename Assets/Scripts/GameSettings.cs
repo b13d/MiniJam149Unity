@@ -28,6 +28,9 @@ public class GameSettings : MonoBehaviour
     [SerializeField]
     private GameObject _canvasMenu = null;
 
+    [SerializeField]
+    private GameObject _authPanel = null;
+
     public int Record
     {
         get { return record; }
@@ -119,4 +122,8 @@ public class GameSettings : MonoBehaviour
         _canvasMenu.SetActive(true);
     }
 
+    public void ShowAuthPanel()
+    {
+        _authPanel.SetActive(true);
+    }
 }
