@@ -21,6 +21,9 @@ public class CanvasUI : MonoBehaviour
         if (YandexGame.EnvironmentData.isMobile)
         {
             _mobilePanel.SetActive(true);
+        } else
+        {
+            _mobilePanel.SetActive(false);
         }
     }
 }

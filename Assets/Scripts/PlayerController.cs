@@ -54,6 +54,18 @@ public class PlayerController : MonoBehaviour
         get { return isShaking; }
     }
 
+    public float DirectionJump
+    {
+        get
+        {
+            return _directionJump;
+        }
+        set
+        {
+            _directionJump = value;
+        }
+    }
+
     void Start()
     {
         _startPosXCamera = Camera.main.transform.position.x;

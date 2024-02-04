@@ -61,6 +61,8 @@ public class PlayerUI : MonoBehaviour
 
             if (oldRecord < difference)
             {
+                YandexGame.NewLeaderboardScores("Record", difference);
+
                 YandexGame.savesData.record = difference;
                 YandexGame.SaveProgress();
             }

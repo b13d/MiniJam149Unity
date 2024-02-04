@@ -71,7 +71,7 @@ public class BuffPlayer : MonoBehaviour
 
         if (_target.y < transform.position.y)
         {
-            rb.velocity = new Vector2(0, -24f);
+            rb.velocity = new Vector2(0, -18f);
         } else
         {
             GetComponent<PlayerController>().CanMove = true;

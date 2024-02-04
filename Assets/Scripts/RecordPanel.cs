@@ -24,6 +24,8 @@ public class RecordPanel : MonoBehaviour
 
     void GetData()
     {
+        YandexGame.NewLeaderboardScores("Record", YandexGame.savesData.record);
+
         txtScoreRecord.text = YandexGame.savesData.record.ToString();
     }
 }

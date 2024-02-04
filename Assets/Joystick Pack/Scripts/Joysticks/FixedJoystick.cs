@@ -17,6 +17,10 @@ public class FixedJoystick : Joystick
     {
         if (Horizontal < 0)
         {
+            PlayerController.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+            PlayerController.DirectionJump = -1;
+
+
             if (_rbPlayer.velocity.x < -_speed)
             {
                 return;
@@ -26,6 +30,10 @@ public class FixedJoystick : Joystick
         }
         else if (Horizontal > 0)
         {
+            PlayerController.DirectionJump = 1;
+            PlayerController.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+
+
             if (_rbPlayer.velocity.x > _speed)
             {
                 return;

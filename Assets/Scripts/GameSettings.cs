@@ -77,6 +77,7 @@ public class GameSettings : MonoBehaviour
         }
         else
         {
+            Application.targetFrameRate = 60;
             DontDestroyOnLoad(gameObject);
             instance = this;
         }
