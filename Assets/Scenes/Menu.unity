@@ -1399,7 +1399,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846072523}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -1694,9 +1694,9 @@ Transform:
   m_Children:
   - {fileID: 1218721818}
   - {fileID: 1688179380}
-  - {fileID: 846072527}
   - {fileID: 1911754264}
   - {fileID: 2134897613}
+  - {fileID: 846072527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1092605442
@@ -2473,6 +2473,8 @@ MonoBehaviour:
   _canvasSettings: {fileID: 846072523}
   _canvasMenu: {fileID: 1688179376}
   _authPanel: {fileID: 1874422114}
+  _sliderAudio: {fileID: 998200841}
+  _sliderMusic: {fileID: 625645788}
 --- !u!1 &1632430386
 GameObject:
   m_ObjectHideFlags: 0

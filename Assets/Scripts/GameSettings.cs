@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class GameSettings : MonoBehaviour
 
     [SerializeField]
     private GameObject _authPanel = null;
+
+    [SerializeField]
+    private Slider _sliderAudio = null;
+
+    [SerializeField]
+    private Slider _sliderMusic = null;
 
     public int Record
     {
@@ -86,14 +93,6 @@ public class GameSettings : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-
     public void Play()
     {
         isPaused = false;
@@ -115,6 +114,9 @@ public class GameSettings : MonoBehaviour
     {
         _canvasSettings.SetActive(true);
         _canvasMenu.SetActive(false);
+
+        _sliderAudio.value = _volumeAudio;
+        _sliderMusic.value = _volumeMusic;
     }
 
     public void CloseSettings()

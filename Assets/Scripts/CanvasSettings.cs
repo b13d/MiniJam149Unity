@@ -14,29 +14,24 @@ public class CanvasSettings : MonoBehaviour
     [SerializeField]
     private AudioSource _audioSourcePlayer;
 
-    GameSettings _gameSettings;
-   
-
     private void Start()
     {
-        _gameSettings = GameSettings.instance;
-
-        _sliderMusic.value = _gameSettings.VolumeMusic;
-        _sliderAudio.value = _gameSettings.VolumeAudio;
+        _sliderMusic.value = GameSettings.instance.VolumeMusic;
+        _sliderAudio.value = GameSettings.instance.VolumeAudio;
     }
 
     public void ChangeMusicVolume()
     {
-        _gameSettings.VolumeMusic = _sliderMusic.value;
+        GameSettings.instance.VolumeMusic = _sliderMusic.value;
         
-        AudioSource m_Music = _gameSettings.AudioSourceMusic;
+        AudioSource m_Music = GameSettings.instance.AudioSourceMusic;
 
         m_Music.volume = _sliderMusic.value;
     }
 
     public void ChangeAudioVolume()
     {
-        _gameSettings.VolumeAudio = _sliderAudio.value;
+        GameSettings.instance.VolumeAudio = _sliderAudio.value;
 
         if (_audioSourcePlayer != null)
         {

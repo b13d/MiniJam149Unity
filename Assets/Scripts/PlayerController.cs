@@ -106,16 +106,16 @@ public class PlayerController : MonoBehaviour
     void HoldJump()
     {
 
-        if (_touchJumpHold > 4f)
+        if (_touchJumpHold > 10f)
         {
-            _touchJumpHold = 4f;
+            _touchJumpHold = 10f;
         }
 
         Vector2 _direction = new Vector2(1.5f * _directionJump, 2f);
 
         _rb.AddForce(_direction * _touchJumpHold, ForceMode2D.Impulse);
 
-        _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[0];
+        //_sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[0];
 
         _touchJump = false;
         _touchJumpHold = 0f;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
 
                 _touchJumpHold = 0;
 
-                _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[0];
+                //_sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[0];
 
                 startJump = transform.position;
             }
@@ -324,22 +324,22 @@ public class PlayerController : MonoBehaviour
         {
             _touchJumpHold += Time.deltaTime * 4;
 
-            if (_touchJumpHold < 1f)
-            {
-                _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[0];
-            }
-            else if (_touchJumpHold > 1f && 1.5f > _touchJumpHold)
-            {
-                _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[1];
-            }
-            else if (_touchJumpHold > 1.5 && 2f > _touchJumpHold)
-            {
-                _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[2];
-            }
-            else
-            {
-                _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[3];
-            }
+            //if (_touchJumpHold < 1f)
+            //{
+            //    _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[0];
+            //}
+            //else if (_touchJumpHold > 1f && 1.5f > _touchJumpHold)
+            //{
+            //    _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[1];
+            //}
+            //else if (_touchJumpHold > 1.5 && 2f > _touchJumpHold)
+            //{
+            //    _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[2];
+            //}
+            //else
+            //{
+            //    _sprite.GetComponent<SpriteRenderer>().sprite = _spritesJump[3];
+            //}
         }
     }
 
